@@ -1,8 +1,9 @@
+use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 impl Song {
-    pub fn retrieve_163_lyrics(&self) -> Lyrics {
+    pub fn retrieve_163_lyrics(&self) -> Result<Lyrics> {
         static lyrics_url: &str = "http://music.163.com/api/song/lyric";
         let client = reqwest::blocking::Client::default();
         let mut query: HashMap<String, String> = HashMap::default();
@@ -10,14 +11,8 @@ impl Song {
         query.insert("lv".to_owned(), "1".into());
         query.insert("kv".to_owned(), "-1".into());
         query.insert("tv".to_owned(), "-1".into());
-        let resp: Lyrics = client
-            .get(lyrics_url)
-            .query(&query)
-            .send()
-            .unwrap()
-            .json()
-            .unwrap();
-        return resp;
+        let resp: Lyrics = client.get(lyrics_url).query(&query).send()?.json()?;
+        return Ok(resp);
     }
 }
 

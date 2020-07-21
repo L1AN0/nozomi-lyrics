@@ -16,6 +16,7 @@ dialoguer = "0.6"
 lrc = { git = "https://github.com/L1AN0/lrc.git" }
 tracing = "0.1"
 tracing-subscriber = "0.2"
+anyhow = "1.0"
 
 [[bin]]
 name = "nozomi-lyrics"

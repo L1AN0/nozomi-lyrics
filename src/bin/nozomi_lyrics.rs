@@ -60,6 +60,7 @@ fn main() {
                 let search_results = current_music.retrieve_163_search_results();
                 let selection = if args.prompt {
                     let selection_idx = Select::new()
+                        .paged(true)
                         .with_prompt("pick search result")
                         .default(0)
                         .items(&search_results.result.songs)
@@ -70,10 +71,14 @@ fn main() {
                     &search_results.result.songs[0]
                 };
                 let retrieved_lyrics = selection.retrieve_163_lyrics();
-                lyrics = retrieved_lyrics.lrc.to_lyrics();
-                tlyrics = retrieved_lyrics.tlyric.to_lyrics();
-                tracing::debug!("{:?}", lyrics);
-                tracing::debug!("{:?}", lyrics.as_ref().unwrap().get_timed_lines());
+                if let Ok(retrieved_lyrics) = retrieved_lyrics {
+                    lyrics = retrieved_lyrics.lrc.to_lyrics();
+                    tlyrics = retrieved_lyrics.tlyric.to_lyrics();
+                    tracing::debug!("{:?}", lyrics);
+                    tracing::debug!("{:?}", lyrics.as_ref().unwrap().get_timed_lines());
+                } else {
+                    eprintln!("cannot retrieve lyrics: {:?}", retrieved_lyrics);
+                }
             }
         } else {
             tracing::debug!("metadata {:#?}", metadata);
