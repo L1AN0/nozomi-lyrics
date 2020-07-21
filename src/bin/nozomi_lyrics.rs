@@ -1,7 +1,7 @@
 use dialoguer::Select;
 use lrc::TimeTag;
 use mpris::PlayerFinder;
-use nozomi_player::PlayingMusic;
+use nozomi_lyrics::PlayingMusic;
 use std::io::Write;
 use std::time::Duration;
 use structopt::StructOpt;
