@@ -1,6 +1,6 @@
 # nozomi-lyrics
 
-Show lyrics using netease music API for any MPRIS2 music player (for example ![Rhythmbox](https://wiki.gnome.org/Apps/Rhythmbox)).
+Show lyrics using netease music API for any MPRIS2 music player (for example [Rhythmbox](https://wiki.gnome.org/Apps/Rhythmbox)).
 
 
 
